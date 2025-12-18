@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_assignment/ui/home_page/home_page.dart';
+import 'package:flutter_basic_assignment/todo_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const TasksApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TodoProvider(),
+      child: TasksApp(),
+    ),
+  );
 }
 
 class TasksApp extends StatelessWidget {
@@ -18,6 +25,7 @@ class TasksApp extends StatelessWidget {
           seedColor: Colors.deepPurple,
           brightness: Brightness.light,
         ),
+        dividerColor: Colors.black,
         scaffoldBackgroundColor: Colors.grey[350],
       ),
       darkTheme: ThemeData(
@@ -26,6 +34,7 @@ class TasksApp extends StatelessWidget {
           seedColor: Colors.blueGrey,
           brightness: Brightness.dark,
         ),
+        dividerColor: Colors.grey,
         scaffoldBackgroundColor: Colors.black,
       ),
       home: HomePage(name: "영광"),
