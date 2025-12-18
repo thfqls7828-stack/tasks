@@ -11,7 +11,6 @@ class TasksApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Colors.grey,
       themeMode: ThemeMode.light,
       theme: ThemeData(
         useMaterial3: true,
@@ -19,6 +18,7 @@ class TasksApp extends StatelessWidget {
           seedColor: Colors.deepPurple,
           brightness: Brightness.light,
         ),
+        scaffoldBackgroundColor: Colors.grey[350],
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
@@ -26,8 +26,9 @@ class TasksApp extends StatelessWidget {
           seedColor: Colors.blueGrey,
           brightness: Brightness.dark,
         ),
+        scaffoldBackgroundColor: Colors.black,
       ),
-      home: HomePage(),
+      home: HomePage(name: "영광"),
     );
   }
 }
