@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_assignment/bottom_sheet_provider.dart';
+import 'package:flutter_basic_assignment/entity/to_do_entity.dart';
+import 'package:flutter_basic_assignment/todo_provider.dart';
+import 'package:provider/provider.dart';
 
-class BottomSheetAddToDo extends StatefulWidget {
+class BottomSheetAddToDo extends StatelessWidget {
   const BottomSheetAddToDo({super.key});
 
   @override
-  State<BottomSheetAddToDo> createState() => _BottomSheetAddToDoState();
-}
-
-class _BottomSheetAddToDoState extends State<BottomSheetAddToDo> {
-  String _textValue = "";
-  bool _isEmpty = true;
-
-  void onToggleSaveBtn() {
-    setState(() {
-      _isEmpty = _textValue == "" ? true : false;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final bottomSheetProvider = Provider.of<BottomSheetProvider>(context);
+    final todoProvider = Provider.of<TodoProvider>(context);
+
+    void saveTodo() {
+      todoProvider.getTodo(
+        ToDoEntity(
+          title: bottomSheetProvider.title,
+          isFavorite: bottomSheetProvider.isFavorite,
+          isDone: false,
+        ),
+      );
+      bottomSheetProvider.resetData();
+    }
+
     return Padding(
       padding: EdgeInsets.only(
         left: 20,
@@ -27,6 +31,7 @@ class _BottomSheetAddToDoState extends State<BottomSheetAddToDo> {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             style: TextStyle(fontSize: 16),
@@ -36,29 +41,163 @@ class _BottomSheetAddToDoState extends State<BottomSheetAddToDo> {
               hintText: "새 할 일",
             ),
             maxLines: 1,
-            onSubmitted: (value) => setState(() {
-              _textValue = value;
-            }),
+            onChanged: (value) => bottomSheetProvider.getTitle(value),
+            onSubmitted: (value) {
+              if (bottomSheetProvider.title != "") {
+                saveTodo();
+                Navigator.pop(context);
+              }
+            },
           ),
-          GestureDetector(
-            child: Row(
-              spacing: 20,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Icon(Icons.short_text_rounded, size: 24),
-                Icon(Icons.star_border, size: 24),
-                Spacer(),
-                Text(
+          if (bottomSheetProvider.isDetail)
+            TextField(
+              textInputAction: TextInputAction.newline,
+              style: TextStyle(fontSize: 14),
+              decoration: InputDecoration(
+                isDense: true,
+                border: InputBorder.none,
+                hintText: "세부정보 추가",
+              ),
+              maxLines: null,
+              onChanged: (value) => bottomSheetProvider.getDes(value),
+            ),
+          Row(
+            children: [
+              if (!bottomSheetProvider.isDetail)
+                IconButton(
+                  icon: Icon(Icons.short_text_rounded, size: 24),
+                  onPressed: () => {bottomSheetProvider.onToggleisDetail()},
+                ),
+              IconButton(
+                icon: Icon(
+                  bottomSheetProvider.isFavorite
+                      ? Icons.star
+                      : Icons.star_border,
+                  size: 24,
+                ),
+                onPressed: () => bottomSheetProvider.onToggleisFavorite(),
+              ),
+              Spacer(),
+              GestureDetector(
+                onTap: () {
+                  if (bottomSheetProvider.title != "") {
+                    saveTodo();
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text(
                   "저장",
                   style: TextStyle(
-                    color: _isEmpty ? Colors.grey : Colors.black,
+                    color: bottomSheetProvider.title == ""
+                        ? Colors.grey
+                        : Colors.black,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 }
+
+// 시행착오들
+
+// class DeatilWidget extends StatelessWidget {
+//   const DeatilWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final provider = Provider.of<BottomSheetProvider>(context);
+
+//     return Column(
+//       children: [
+//         TextField(
+//           textInputAction: TextInputAction.newline,
+//           style: TextStyle(fontSize: 14),
+//           decoration: InputDecoration(
+//             isDense: true,
+//             border: InputBorder.none,
+//             hintText: "세부정보 추가",
+//           ),
+//           maxLines: null,
+//           onChanged: (value) => provider.getDes(value),
+//         ),
+//         Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             if (!provider.isDetail)
+//               IconButton(
+//                 icon: Icon(Icons.short_text_rounded, size: 24),
+//                 onPressed: () => {provider.onToggleisDetail()},
+//               ),
+//             IconButton(
+//               icon: Icon(
+//                 provider.isFavorite ? Icons.star : Icons.star_border,
+//                 size: 24,
+//               ),
+//               onPressed: () => provider.onToggleisFavorite(),
+//             ),
+//             GestureDetector(
+//               onTap: () {
+//                 if (provider.title != "") {
+//                   provider.resetData();
+//                   Navigator.pop(context);
+//                 }
+//               },
+//               child: Text(
+//                 "저장",
+//                 style: TextStyle(
+//                   color: provider.title == "" ? Colors.grey : Colors.black,
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+// class InitialWidget extends StatelessWidget {
+//   const InitialWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final provider = Provider.of<BottomSheetProvider>(context);
+
+//     return Row(
+//       spacing: 20,
+//       children: [
+//         IconButton(
+//           icon: Icon(Icons.short_text_rounded, size: 24),
+//           onPressed: () {
+//             context.read<BottomSheetProvider>().onToggleisDetail();
+//           },
+//         ),
+//         IconButton(
+//           icon: Icon(
+//             provider.isFavorite ? Icons.star : Icons.star_border,
+//             size: 24,
+//           ),
+//           onPressed: () {
+//             provider.onToggleisFavorite();
+//           },
+//         ),
+//         Spacer(),
+//         GestureDetector(
+//           onTap: () {
+//             if (provider.title != "") Navigator.pop(context);
+//           },
+//           child: Text(
+//             "저장",
+//             style: TextStyle(
+//               color: provider.title == "" ? Colors.grey : Colors.black,
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

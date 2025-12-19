@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_assignment/bottom_sheet_provider.dart';
 import 'package:flutter_basic_assignment/ui/home_page/home_page.dart';
 import 'package:flutter_basic_assignment/todo_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => TodoProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TodoProvider()),
+        ChangeNotifierProvider(create: (context) => BottomSheetProvider()),
+      ],
       child: TasksApp(),
     ),
   );

@@ -8,9 +8,13 @@ class TaskPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final todoProvider = Provider.of<TodoProvider>(context);
+
     return ListView.builder(
-      itemCount: Provider.of<TodoProvider>(context).todoList.length,
-      itemBuilder: (context, index) => Placeholder(),
+      itemCount: TodoProvider().getListLength(),
+      itemBuilder: (context, index) {
+        return Container(child: Text(todoProvider.todoList[index].title));
+      },
     );
   }
 }

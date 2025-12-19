@@ -14,10 +14,11 @@ class HomePage extends StatelessWidget {
 
   // btn onClick
   void addTodo(BuildContext context) {
-    showModalBottomSheet<void>(
+    showModalBottomSheet(
+      isDismissible: false,
       useSafeArea: true,
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return BottomSheetAddToDo();
       },
     );
@@ -26,7 +27,7 @@ class HomePage extends StatelessWidget {
   // Scaffold
   @override
   Widget build(BuildContext context) {
-    bool isNot = Provider.of<TodoProvider>(context).todoList.isEmpty;
+    final todoProvider = Provider.of<TodoProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +37,7 @@ class HomePage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: isNot ? InitailPage(name: name) : TaskPage(),
+      body: todoProvider.isEmpty() ? InitailPage(name: name) : TaskPage(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.cyan,
         shape: CircleBorder(),
