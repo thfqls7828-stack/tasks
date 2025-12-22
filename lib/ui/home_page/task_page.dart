@@ -57,6 +57,7 @@ class TodoView extends StatelessWidget {
               todoProvider.todoList[idx].isDone
                   ? Icons.check_circle
                   : Icons.circle_outlined,
+              color: Theme.of(context).dividerColor,
             ),
           ),
           Text(
@@ -65,6 +66,7 @@ class TodoView extends StatelessWidget {
               decoration: todoProvider.todoList[idx].isDone
                   ? TextDecoration.lineThrough
                   : null,
+              color: Theme.of(context).dividerColor,
             ),
           ),
           Spacer(),
@@ -74,6 +76,7 @@ class TodoView extends StatelessWidget {
               todoProvider.todoList[idx].isFavorite
                   ? Icons.star
                   : Icons.star_border,
+              color: Theme.of(context).dividerColor,
             ),
           ),
         ],

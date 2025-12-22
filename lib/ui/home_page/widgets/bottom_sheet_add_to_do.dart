@@ -35,7 +35,10 @@ class BottomSheetAddToDo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(
+              fontSize: 16,
+              color: Theme.of(context).dividerColor,
+            ),
             autofocus: true,
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -54,7 +57,10 @@ class BottomSheetAddToDo extends StatelessWidget {
             Expanded(
               child: TextField(
                 textInputAction: TextInputAction.newline,
-                style: TextStyle(fontSize: 14),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).dividerColor,
+                ),
                 decoration: InputDecoration(
                   // isDense: true,
                   border: InputBorder.none,
@@ -68,7 +74,11 @@ class BottomSheetAddToDo extends StatelessWidget {
             children: [
               if (!bottomSheetProvider.isDetail)
                 IconButton(
-                  icon: Icon(Icons.short_text_rounded, size: 24),
+                  icon: Icon(
+                    Icons.short_text_rounded,
+                    size: 24,
+                    color: Theme.of(context).dividerColor,
+                  ),
                   onPressed: () => {bottomSheetProvider.onToggleDetail()},
                 ),
               IconButton(
@@ -77,6 +87,7 @@ class BottomSheetAddToDo extends StatelessWidget {
                       ? Icons.star
                       : Icons.star_border,
                   size: 24,
+                  color: Theme.of(context).dividerColor,
                 ),
                 onPressed: () => bottomSheetProvider.onToggleFavorite(),
               ),

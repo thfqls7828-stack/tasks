@@ -24,6 +24,7 @@ class ToDoDetailPage extends StatelessWidget {
               todoProvider.todoList[idx].isFavorite
                   ? Icons.star
                   : Icons.star_border,
+              color: Theme.of(context).dividerColor,
             ),
             onPressed: () => todoProvider.onToggleFavorite(idx),
           ),
@@ -37,7 +38,11 @@ class ToDoDetailPage extends StatelessWidget {
           children: [
             Text(
               "새로운 할 일 2",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).dividerColor,
+              ),
             ),
             Row(
               spacing: 10,

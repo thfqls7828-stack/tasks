@@ -19,7 +19,11 @@ class InitailPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: 12,
         children: [
-          Icon(Icons.task_outlined, size: 100, color: Colors.orange),
+          Icon(
+            Icons.task_outlined,
+            size: 100,
+            color: Theme.of(context).highlightColor,
+          ),
           Text(
             "아직 할 일이 없음",
             style: TextStyle(

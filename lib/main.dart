@@ -24,22 +24,26 @@ class TasksApp extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.dark,
       theme: ThemeData(
+        appBarTheme: AppBarThemeData(backgroundColor: Colors.white70),
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+          seedColor: Colors.white,
           brightness: Brightness.light,
         ),
         dividerColor: Colors.black,
+        highlightColor: Colors.orange,
         scaffoldBackgroundColor: Colors.grey[350],
       ),
       darkTheme: ThemeData(
+        appBarTheme: AppBarThemeData(backgroundColor: Colors.grey[600]),
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueGrey,
+          seedColor: Colors.white,
           brightness: Brightness.dark,
         ),
-        dividerColor: Colors.grey,
-        scaffoldBackgroundColor: Colors.black,
+        dividerColor: Colors.black,
+        highlightColor: Colors.indigo,
+        scaffoldBackgroundColor: Colors.grey,
       ),
       home: HomePage(name: "영광"),
     );

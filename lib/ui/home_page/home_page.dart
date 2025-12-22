@@ -35,7 +35,11 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "$name's Tasks",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).dividerColor,
+          ),
         ),
         centerTitle: true,
       ),
@@ -44,7 +48,7 @@ class HomePage extends StatelessWidget {
         child: todoProvider.isEmpty() ? InitailPage(name: name) : TaskPage(),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.cyan,
+        backgroundColor: Theme.of(context).highlightColor,
         shape: CircleBorder(),
         onPressed: () {
           addTodo(context);
