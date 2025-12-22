@@ -10,29 +10,44 @@ class ToDoDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todoProvider = Provider.of<TodoProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
+        actionsPadding: EdgeInsets.symmetric(horizontal: 20),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
         actions: [
-          Icon(
-            todoProvider.todoList[idx].isFavorite
-                ? Icons.star
-                : Icons.star_border,
+          IconButton(
+            icon: Icon(
+              todoProvider.todoList[idx].isFavorite
+                  ? Icons.star
+                  : Icons.star_border,
+            ),
+            onPressed: () => todoProvider.onToggleFavorite(idx),
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Text("새로운 할 일 2"),
-          Row(
-            spacing: 10,
-            children: [
-              Icon(Icons.short_text),
-              Text(todoProvider.todoList[idx].description),
-              Text("세부 내용은 여기에 작성합니다."),
-            ],
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 10,
+          children: [
+            Text(
+              "새로운 할 일 2",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Row(
+              spacing: 10,
+              children: [
+                Icon(Icons.short_text),
+                Text(todoProvider.todoList[idx].description ?? ""),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

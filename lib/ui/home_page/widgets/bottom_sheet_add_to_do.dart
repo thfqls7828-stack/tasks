@@ -17,6 +17,7 @@ class BottomSheetAddToDo extends StatelessWidget {
         ToDoEntity(
           title: bottomSheetProvider.title,
           isFavorite: bottomSheetProvider.isFavorite,
+          description: bottomSheetProvider.des,
           isDone: false,
         ),
       );

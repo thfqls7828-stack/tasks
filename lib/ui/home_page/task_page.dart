@@ -15,10 +15,14 @@ class TaskPage extends StatelessWidget {
       itemCount: todoProvider.getListLength(),
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ToDoDetailPage(idx: index)),
-          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ToDoDetailPage(idx: index),
+              ),
+            );
+          },
           child: TodoView(idx: index),
         );
       },

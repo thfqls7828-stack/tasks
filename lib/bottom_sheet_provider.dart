@@ -17,6 +17,7 @@ class BottomSheetProvider extends ChangeNotifier {
 
   void getDes(String newDes) {
     _des = newDes;
+    notifyListeners();
   }
 
   void onToggleFavorite() {
