@@ -48,7 +48,7 @@ class BottomSheetAddToDo extends StatelessWidget {
             maxLines: 1,
             onChanged: (value) => bottomSheetProvider.getTitle(value),
             onSubmitted: (value) {
-              if (bottomSheetProvider.title != "") {
+              if (bottomSheetProvider.title.trim() != "") {
                 saveTodo();
                 Navigator.pop(context);
               }
@@ -90,7 +90,7 @@ class BottomSheetAddToDo extends StatelessWidget {
               SizedBox(width: 8),
               GestureDetector(
                 onTap: () {
-                  if (bottomSheetProvider.title != "") {
+                  if (bottomSheetProvider.title.trim() != "") {
                     saveTodo();
                     Navigator.pop(context);
                   }
@@ -98,7 +98,7 @@ class BottomSheetAddToDo extends StatelessWidget {
                 child: Text(
                   "저장",
                   style: TextStyle(
-                    color: bottomSheetProvider.title == ""
+                    color: bottomSheetProvider.title.trim() == ""
                         ? Colors.grey
                         : Theme.of(context).highlightColor,
                   ),

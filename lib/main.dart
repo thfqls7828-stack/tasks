@@ -22,7 +22,7 @@ class TasksApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       theme: ThemeData(
         appBarTheme: AppBarThemeData(backgroundColor: Colors.white70),
         useMaterial3: true,
