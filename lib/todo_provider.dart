@@ -18,6 +18,11 @@ class TodoProvider extends ChangeNotifier {
     return _todoList.isEmpty;
   }
 
+  void deleteTodo(int idx) {
+    _todoList.removeAt(idx);
+    notifyListeners();
+  }
+
   void onToggleDone(int idx) {
     bool isDone = _todoList[idx].isDone;
     _todoList[idx] = _todoList[idx].copyWith(null, !isDone);

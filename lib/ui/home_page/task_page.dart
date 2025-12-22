@@ -39,47 +39,54 @@ class TodoView extends StatelessWidget {
   Widget build(BuildContext context) {
     final todoProvider = Provider.of<TodoProvider>(context);
 
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
-      ),
-      child: Row(
-        spacing: 12,
-        children: [
-          IconButton(
-            onPressed: () {
-              todoProvider.onToggleDone(idx);
-            },
-            icon: Icon(
-              todoProvider.todoList[idx].isDone
-                  ? Icons.check_circle
-                  : Icons.circle_outlined,
-              color: Theme.of(context).dividerColor,
+    return Dismissible(
+      key: Key("$idx"),
+      direction: DismissDirection.endToStart,
+      onDismissed: (direction) => todoProvider.deleteTodo(idx),
+      background: SizedBox(),
+      secondaryBackground: Icon(Icons.delete),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
+        ),
+        child: Row(
+          spacing: 12,
+          children: [
+            IconButton(
+              onPressed: () {
+                todoProvider.onToggleDone(idx);
+              },
+              icon: Icon(
+                todoProvider.todoList[idx].isDone
+                    ? Icons.check_circle
+                    : Icons.circle_outlined,
+                color: Theme.of(context).dividerColor,
+              ),
             ),
-          ),
-          Text(
-            todoProvider.todoList[idx].title,
-            style: TextStyle(
-              decoration: todoProvider.todoList[idx].isDone
-                  ? TextDecoration.lineThrough
-                  : null,
-              color: Theme.of(context).dividerColor,
+            Text(
+              todoProvider.todoList[idx].title,
+              style: TextStyle(
+                decoration: todoProvider.todoList[idx].isDone
+                    ? TextDecoration.lineThrough
+                    : null,
+                color: Theme.of(context).dividerColor,
+              ),
             ),
-          ),
-          Spacer(),
-          IconButton(
-            onPressed: () => todoProvider.onToggleFavorite(idx),
-            icon: Icon(
-              todoProvider.todoList[idx].isFavorite
-                  ? Icons.star
-                  : Icons.star_border,
-              color: Theme.of(context).dividerColor,
+            Spacer(),
+            IconButton(
+              onPressed: () => todoProvider.onToggleFavorite(idx),
+              icon: Icon(
+                todoProvider.todoList[idx].isFavorite
+                    ? Icons.star
+                    : Icons.star_border,
+                color: Theme.of(context).dividerColor,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

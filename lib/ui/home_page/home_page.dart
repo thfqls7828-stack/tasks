@@ -17,6 +17,7 @@ class HomePage extends StatelessWidget {
     showModalBottomSheet(
       backgroundColor: Colors.white,
       isDismissible: false,
+      enableDrag: false,
       useSafeArea: true,
       context: context,
       builder: (context) {

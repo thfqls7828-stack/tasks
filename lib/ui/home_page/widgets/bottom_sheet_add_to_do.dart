@@ -4,6 +4,7 @@ import 'package:flutter_basic_assignment/entity/to_do_entity.dart';
 import 'package:flutter_basic_assignment/todo_provider.dart';
 import 'package:provider/provider.dart';
 
+// Modal BottomSheet
 class BottomSheetAddToDo extends StatelessWidget {
   const BottomSheetAddToDo({super.key});
 
@@ -53,23 +54,7 @@ class BottomSheetAddToDo extends StatelessWidget {
               }
             },
           ),
-          if (bottomSheetProvider.isDetail)
-            Expanded(
-              child: TextField(
-                textInputAction: TextInputAction.newline,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).dividerColor,
-                ),
-                decoration: InputDecoration(
-                  // isDense: true,
-                  border: InputBorder.none,
-                  hintText: "세부정보 추가",
-                ),
-                maxLines: null,
-                onChanged: (value) => bottomSheetProvider.getDes(value),
-              ),
-            ),
+          if (bottomSheetProvider.isDetail) Details(),
           Row(
             children: [
               if (!bottomSheetProvider.isDetail)
@@ -94,6 +79,17 @@ class BottomSheetAddToDo extends StatelessWidget {
               Spacer(),
               GestureDetector(
                 onTap: () {
+                  bottomSheetProvider.resetData();
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "뒤로",
+                  style: TextStyle(color: Theme.of(context).dividerColor),
+                ),
+              ),
+              SizedBox(width: 8),
+              GestureDetector(
+                onTap: () {
                   if (bottomSheetProvider.title != "") {
                     saveTodo();
                     Navigator.pop(context);
@@ -104,13 +100,37 @@ class BottomSheetAddToDo extends StatelessWidget {
                   style: TextStyle(
                     color: bottomSheetProvider.title == ""
                         ? Colors.grey
-                        : Colors.black,
+                        : Theme.of(context).highlightColor,
                   ),
                 ),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+// 세부정보 입력 TextField
+class Details extends StatelessWidget {
+  const Details({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final bottomSheetProvider = Provider.of<BottomSheetProvider>(context);
+
+    return Expanded(
+      child: TextField(
+        textInputAction: TextInputAction.newline,
+        style: TextStyle(fontSize: 14, color: Theme.of(context).dividerColor),
+        decoration: InputDecoration(
+          // isDense: true,
+          border: InputBorder.none,
+          hintText: "세부정보 추가",
+        ),
+        maxLines: null,
+        onChanged: (value) => bottomSheetProvider.getDes(value),
       ),
     );
   }
