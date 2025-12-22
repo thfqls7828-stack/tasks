@@ -19,12 +19,12 @@ class BottomSheetProvider extends ChangeNotifier {
     _des = newDes;
   }
 
-  void onToggleisFavorite() {
+  void onToggleFavorite() {
     _isFavorite = !_isFavorite;
     notifyListeners();
   }
 
-  void onToggleisDetail() {
+  void onToggleDetail() {
     _isDetail = !_isDetail;
     notifyListeners();
   }

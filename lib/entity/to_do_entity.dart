@@ -10,4 +10,12 @@ class ToDoEntity {
   final String? description;
   final bool isFavorite;
   final bool isDone;
+
+  ToDoEntity copyWith(bool? newFavorite, bool? newDone) {
+    return ToDoEntity(
+      title: title,
+      isFavorite: newFavorite ?? isFavorite,
+      isDone: newDone ?? isDone,
+    );
+  }
 }

@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
   // btn onClick
   void addTodo(BuildContext context) {
     showModalBottomSheet(
+      backgroundColor: Colors.white,
       isDismissible: false,
       useSafeArea: true,
       context: context,
@@ -30,6 +31,7 @@ class HomePage extends StatelessWidget {
     final todoProvider = Provider.of<TodoProvider>(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(
           "$name's Tasks",
@@ -37,7 +39,10 @@ class HomePage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: todoProvider.isEmpty() ? InitailPage(name: name) : TaskPage(),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: todoProvider.isEmpty() ? InitailPage(name: name) : TaskPage(),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.cyan,
         shape: CircleBorder(),

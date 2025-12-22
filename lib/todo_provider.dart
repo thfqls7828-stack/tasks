@@ -17,4 +17,18 @@ class TodoProvider extends ChangeNotifier {
   bool isEmpty() {
     return _todoList.isEmpty;
   }
+
+  void onToggleDone(int idx) {
+    bool isDone = _todoList[idx].isDone;
+    _todoList[idx] = _todoList[idx].copyWith(null, !isDone);
+
+    notifyListeners();
+  }
+
+  void onToggleFavorite(int idx) {
+    bool isFavorite = _todoList[idx].isFavorite;
+    _todoList[idx] = _todoList[idx].copyWith(!isFavorite, null);
+
+    notifyListeners();
+  }
 }

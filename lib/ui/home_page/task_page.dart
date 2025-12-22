@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_assignment/todo_provider.dart';
+import 'package:flutter_basic_assignment/ui/to_do_detail_page/to_do_detail_page.dart';
 import 'package:provider/provider.dart';
 
 // Provider has Data
@@ -11,10 +12,68 @@ class TaskPage extends StatelessWidget {
     final todoProvider = Provider.of<TodoProvider>(context);
 
     return ListView.builder(
-      itemCount: TodoProvider().getListLength(),
+      itemCount: todoProvider.getListLength(),
       itemBuilder: (context, index) {
-        return Container(child: Text(todoProvider.todoList[index].title));
+        return GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ToDoDetailPage(idx: index)),
+          ),
+          child: TodoView(idx: index),
+        );
       },
+    );
+  }
+}
+
+class TodoView extends StatelessWidget {
+  const TodoView({super.key, required this.idx});
+
+  final int idx;
+
+  @override
+  Widget build(BuildContext context) {
+    final todoProvider = Provider.of<TodoProvider>(context);
+
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+      ),
+      child: Row(
+        spacing: 12,
+        children: [
+          IconButton(
+            onPressed: () {
+              todoProvider.onToggleDone(idx);
+            },
+            icon: Icon(
+              todoProvider.todoList[idx].isDone
+                  ? Icons.check_circle
+                  : Icons.circle_outlined,
+            ),
+          ),
+          Text(
+            todoProvider.todoList[idx].title,
+            style: TextStyle(
+              decoration: todoProvider.todoList[idx].isDone
+                  ? TextDecoration.lineThrough
+                  : null,
+            ),
+          ),
+          Spacer(),
+          IconButton(
+            onPressed: () => todoProvider.onToggleFavorite(idx),
+            icon: Icon(
+              todoProvider.todoList[idx].isFavorite
+                  ? Icons.star
+                  : Icons.star_border,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

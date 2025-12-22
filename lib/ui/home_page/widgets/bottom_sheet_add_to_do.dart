@@ -50,23 +50,25 @@ class BottomSheetAddToDo extends StatelessWidget {
             },
           ),
           if (bottomSheetProvider.isDetail)
-            TextField(
-              textInputAction: TextInputAction.newline,
-              style: TextStyle(fontSize: 14),
-              decoration: InputDecoration(
-                isDense: true,
-                border: InputBorder.none,
-                hintText: "세부정보 추가",
+            Expanded(
+              child: TextField(
+                textInputAction: TextInputAction.newline,
+                style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                  // isDense: true,
+                  border: InputBorder.none,
+                  hintText: "세부정보 추가",
+                ),
+                maxLines: null,
+                onChanged: (value) => bottomSheetProvider.getDes(value),
               ),
-              maxLines: null,
-              onChanged: (value) => bottomSheetProvider.getDes(value),
             ),
           Row(
             children: [
               if (!bottomSheetProvider.isDetail)
                 IconButton(
                   icon: Icon(Icons.short_text_rounded, size: 24),
-                  onPressed: () => {bottomSheetProvider.onToggleisDetail()},
+                  onPressed: () => {bottomSheetProvider.onToggleDetail()},
                 ),
               IconButton(
                 icon: Icon(
@@ -75,7 +77,7 @@ class BottomSheetAddToDo extends StatelessWidget {
                       : Icons.star_border,
                   size: 24,
                 ),
-                onPressed: () => bottomSheetProvider.onToggleisFavorite(),
+                onPressed: () => bottomSheetProvider.onToggleFavorite(),
               ),
               Spacer(),
               GestureDetector(
