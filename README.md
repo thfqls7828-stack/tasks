@@ -30,18 +30,18 @@
 - TodoEntity의 des 필드를 body 부분에 띄워줌
 
 ## 구현
-<img width="500" height="1000" alt="Screenshot_1766463347" src="https://github.com/user-attachments/assets/f9173dd9-1134-42e2-a583-48fc7613ea7f" />
-<img width="500" height="1000" alt="Screenshot_1766463457" src="https://github.com/user-attachments/assets/da959f5d-174f-4328-be6d-ea17525cf0f5" />
+<img width="300" height="600" alt="Screenshot_1766463347" src="https://github.com/user-attachments/assets/f9173dd9-1134-42e2-a583-48fc7613ea7f" />
+<img width="300" height="600" alt="Screenshot_1766463457" src="https://github.com/user-attachments/assets/da959f5d-174f-4328-be6d-ea17525cf0f5" />
 
 
-<img width="500" height="1000" alt="Screenshot_1766463528" src="https://github.com/user-attachments/assets/e69f390b-1093-4968-a996-9113ba943112" />
-<img width="500" height="1000" alt="Screenshot_1766464363" src="https://github.com/user-attachments/assets/08b2bdef-ca80-46d0-9b9c-5a5bcdff1935" />
+<img width="300" height="600" alt="Screenshot_1766463528" src="https://github.com/user-attachments/assets/e69f390b-1093-4968-a996-9113ba943112" />
+<img width="300" height="600" alt="Screenshot_1766464363" src="https://github.com/user-attachments/assets/08b2bdef-ca80-46d0-9b9c-5a5bcdff1935" />
 
 
 ## 도전 기능
 ### 다크테마 구현
-<img width="500" height="1000" alt="Screenshot_1766464453" src="https://github.com/user-attachments/assets/ce8e5d01-b215-4ce7-a146-c008dfbc103a" />
-<img width="500" height="1000" alt="Screenshot_1766464449" src="https://github.com/user-attachments/assets/9c33265d-d209-4710-8ac5-6ecb71eef90e" />
+<img width="300" height="600" alt="Screenshot_1766464453" src="https://github.com/user-attachments/assets/ce8e5d01-b215-4ce7-a146-c008dfbc103a" />
+<img width="300" height="600" alt="Screenshot_1766464449" src="https://github.com/user-attachments/assets/9c33265d-d209-4710-8ac5-6ecb71eef90e" />
 
 ### 위젯 컴포넌트화
 - Details
