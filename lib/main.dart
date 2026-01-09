@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_assignment/bottom_sheet_provider.dart';
+import 'package:flutter_basic_assignment/core/theme/themes.dart';
 import 'package:flutter_basic_assignment/ui/home_page/home_page.dart';
 import 'package:flutter_basic_assignment/todo_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => TodoProvider()),
-        ChangeNotifierProvider(create: (context) => BottomSheetProvider()),
-      ],
-      child: TasksApp(),
-    ),
-  );
+  runApp(ProviderScope(child: TasksApp()));
 }
 
 class TasksApp extends StatelessWidget {
@@ -22,29 +16,9 @@ class TasksApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.light,
-      theme: ThemeData(
-        appBarTheme: AppBarThemeData(backgroundColor: Colors.white70),
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.white,
-          brightness: Brightness.light,
-        ),
-        dividerColor: Colors.black,
-        highlightColor: Colors.orange,
-        scaffoldBackgroundColor: Colors.grey[350],
-      ),
-      darkTheme: ThemeData(
-        appBarTheme: AppBarThemeData(backgroundColor: Colors.grey[600]),
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.white,
-          brightness: Brightness.dark,
-        ),
-        dividerColor: Colors.black,
-        highlightColor: Colors.indigo,
-        scaffoldBackgroundColor: Colors.grey,
-      ),
+      themeMode: ThemeMode.dark,
+      theme: Themes.lightTheme,
+      darkTheme: Themes.darkTheme,
       home: HomePage(name: "영광"),
     );
   }

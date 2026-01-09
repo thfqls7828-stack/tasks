@@ -1,22 +1,18 @@
-class ToDoEntity {
-  ToDoEntity({
-    required this.title,
-    this.description,
-    required this.isFavorite,
-    required this.isDone,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String title;
-  final String? description;
-  final bool isFavorite;
-  final bool isDone;
+part 'to_do_entity.freezed.dart';
+part 'to_do_entity.g.dart';
 
-  ToDoEntity copyWith(bool? newFavorite, bool? newDone) {
-    return ToDoEntity(
-      title: title,
-      description: description,
-      isFavorite: newFavorite ?? isFavorite,
-      isDone: newDone ?? isDone,
-    );
-  }
+@freezed
+abstract class ToDoEntity with _$ToDoEntity {
+  const factory ToDoEntity({
+    required String id,
+    required String title,
+    String? des,
+    @JsonKey(name: "is_favorite") required bool isFavorite,
+    @JsonKey(name: "is_done") required bool isDone,
+  }) = _ToDoEntity;
+
+  factory ToDoEntity.fromJson(Map<String, dynamic> json) =>
+      _$ToDoEntityFromJson(json);
 }
