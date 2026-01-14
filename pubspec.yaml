@@ -43,6 +43,7 @@ dependencies:
   riverpod_generator: ^4.0.0+1
   cloud_firestore: ^6.1.1
   firebase_core: ^4.3.0
+  geolocator: ^14.0.2
 
 dev_dependencies:
   flutter_test:

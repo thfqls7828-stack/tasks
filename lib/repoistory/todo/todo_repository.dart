@@ -1,4 +1,6 @@
-import 'package:flutter_basic_assignment/entity/to_do_entity.dart';
+import 'package:flutter_basic_assignment/entity/todo/to_do_entity.dart';
+
+// part 'todo_repository.g.dart';
 
 abstract class TodoRepository {
   Future<void> addTodo(ToDoEntity todo);

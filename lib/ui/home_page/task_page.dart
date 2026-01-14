@@ -1,48 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_assignment/todo_provider.dart';
+import 'package:flutter_basic_assignment/entity/todo/to_do_entity.dart';
 import 'package:flutter_basic_assignment/ui/to_do_detail_page/to_do_detail_page.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_basic_assignment/viewmodel/todo/todo_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Provider has Data
-class TaskPage extends StatelessWidget {
+class TaskPage extends ConsumerWidget {
   const TaskPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final todoProvider = Provider.of<TodoProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todos = ref.watch(todoListProvider);
 
-    return ListView.builder(
-      itemCount: todoProvider.getListLength(),
-      itemBuilder: (context, index) {
+    return todos.when(
+      data: (todos) {
         return GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ToDoDetailPage(idx: index),
-              ),
-            );
+            FocusScope.of(context).unfocus();
           },
-          child: TodoView(idx: index),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 50),
+            child: ListView.builder(
+              itemCount: todos.length,
+              itemBuilder: (context, index) {
+                final todo = todos[index];
+
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ToDoDetailPage(id: todos[index].id),
+                      ),
+                    );
+                  },
+                  child: TodoView(todo: todo),
+                );
+              },
+            ),
+          ),
         );
+      },
+      error: (error, stackTrace) {
+        return Center(child: Text(error.toString()));
+      },
+      loading: () {
+        return const CircularProgressIndicator();
       },
     );
   }
 }
 
-class TodoView extends StatelessWidget {
-  const TodoView({super.key, required this.idx});
+class TodoView extends ConsumerWidget {
+  const TodoView({super.key, required this.todo});
 
-  final int idx;
+  final ToDoEntity todo;
 
   @override
-  Widget build(BuildContext context) {
-    final todoProvider = Provider.of<TodoProvider>(context);
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return Dismissible(
-      key: Key("$idx"),
+      key: Key(todo.id),
       direction: DismissDirection.endToStart,
-      onDismissed: (direction) => todoProvider.deleteTodo(idx),
+      onDismissed: (direction) =>
+          ref.read(todoListProvider.notifier).deleteTodo(todo),
       background: SizedBox(),
       secondaryBackground: Icon(Icons.delete),
       child: Container(
@@ -57,32 +78,34 @@ class TodoView extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                todoProvider.onToggleDone(idx);
+                ref
+                    .read(todoListProvider.notifier)
+                    .updateTodo(todo.copyWith(isDone: !todo.isDone));
               },
               icon: Icon(
-                todoProvider.todoList[idx].isDone
-                    ? Icons.check_circle
-                    : Icons.circle_outlined,
-                color: Theme.of(context).dividerColor,
+                todo.isDone ? Icons.check_circle : Icons.circle_outlined,
+                color: Colors.black,
               ),
             ),
             Text(
-              todoProvider.todoList[idx].title,
+              todo.title,
               style: TextStyle(
-                decoration: todoProvider.todoList[idx].isDone
-                    ? TextDecoration.lineThrough
-                    : null,
-                color: Theme.of(context).dividerColor,
+                decorationThickness: 3,
+                decorationColor: Colors.black54,
+                decoration: todo.isDone ? TextDecoration.lineThrough : null,
+                color: Colors.black,
               ),
             ),
             Spacer(),
             IconButton(
-              onPressed: () => todoProvider.onToggleFavorite(idx),
+              onPressed: () {
+                ref
+                    .read(todoListProvider.notifier)
+                    .updateTodo(todo.copyWith(isFavorite: !todo.isFavorite));
+              },
               icon: Icon(
-                todoProvider.todoList[idx].isFavorite
-                    ? Icons.star
-                    : Icons.star_border,
-                color: Theme.of(context).dividerColor,
+                todo.isFavorite ? Icons.star : Icons.star_border,
+                color: Colors.red[300],
               ),
             ),
           ],

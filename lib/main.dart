@@ -1,12 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_assignment/bottom_sheet_provider.dart';
 import 'package:flutter_basic_assignment/core/theme/themes.dart';
+import 'package:flutter_basic_assignment/firebase_options.dart';
 import 'package:flutter_basic_assignment/ui/home_page/home_page.dart';
-import 'package:flutter_basic_assignment/todo_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(ProviderScope(child: TasksApp()));
 }
 

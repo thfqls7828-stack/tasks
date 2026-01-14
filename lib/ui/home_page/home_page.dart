@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_assignment/todo_provider.dart';
 import 'package:flutter_basic_assignment/ui/home_page/initail_page.dart';
 import 'package:flutter_basic_assignment/ui/home_page/task_page.dart';
 import 'package:flutter_basic_assignment/ui/home_page/widgets/bottom_sheet_add_to_do.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_basic_assignment/viewmodel/todo/todo_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // first Page - HomePage
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key, required this.name});
 
   // 사용자 이름
@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
   void addTodo(BuildContext context) {
     showModalBottomSheet(
       backgroundColor: Colors.white,
-      isDismissible: false,
       enableDrag: false,
       useSafeArea: true,
       context: context,
@@ -28,11 +27,10 @@ class HomePage extends StatelessWidget {
 
   // Scaffold
   @override
-  Widget build(BuildContext context) {
-    final todoProvider = Provider.of<TodoProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todoAsyncValue = ref.watch(todoListProvider);
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(
           "$name's Tasks",
@@ -46,7 +44,17 @@ class HomePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: todoProvider.isEmpty() ? InitailPage(name: name) : TaskPage(),
+        child: todoAsyncValue.when(
+          data: (todos) {
+            return todos.isEmpty ? InitailPage(name: name) : TaskPage();
+          },
+          error: (error, stackTrace) {
+            return Center(child: Text(error.toString()));
+          },
+          loading: () {
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).highlightColor,
