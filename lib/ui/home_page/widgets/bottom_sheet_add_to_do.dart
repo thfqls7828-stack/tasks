@@ -40,7 +40,7 @@ class BottomSheetAddToDoState extends ConsumerState<BottomSheetAddToDo> {
             id: "temp",
             title: titleController.text,
             isFavorite: isFavorite,
-            des: desController.text == "" ? null : desController.text,
+            des: desController.text.trim() == "" ? null : desController.text,
             isDone: false,
           ),
         );

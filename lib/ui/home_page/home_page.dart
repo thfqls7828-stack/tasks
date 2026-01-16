@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_assignment/ui/error/error_page.dart';
 import 'package:flutter_basic_assignment/ui/home_page/initail_page.dart';
 import 'package:flutter_basic_assignment/ui/home_page/task_page.dart';
 import 'package:flutter_basic_assignment/ui/home_page/widgets/bottom_sheet_add_to_do.dart';
@@ -49,7 +50,7 @@ class HomePage extends ConsumerWidget {
             return todos.isEmpty ? InitailPage(name: name) : TaskPage();
           },
           error: (error, stackTrace) {
-            return Center(child: Text(error.toString()));
+            return ErrorPage(error: error);
           },
           loading: () {
             return Center(child: CircularProgressIndicator());

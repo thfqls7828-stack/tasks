@@ -1,10 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class ErrorPage extends StatelessWidget {
+  const ErrorPage({super.key, required this.error});
+
+  final Object error;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 10,
+        children: [
+          Icon(CupertinoIcons.clear_circled_solid, size: 100),
+          Text(error.toString(), style: TextStyle(fontSize: 20)),
+        ],
+      ),
+    );
   }
 }

@@ -18,7 +18,7 @@ class TasksApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
       home: HomePage(name: "영광"),
