@@ -1,53 +1,104 @@
-# 🔎 Todo App
-## 프로그래밍 요구사항
+# 🔎 Todo App - riverpod
+## ⭐ 프로그래밍 요구사항
 ### Todo Entity 정의
 ```dart
- final String title;
-  final String? description;
-  final bool isFavorite;
-  final bool isDone;
+part 'to_do_entity.freezed.dart';
+part 'to_do_entity.g.dart';
+
+@freezed
+abstract class ToDoEntity with _$ToDoEntity {
+  const factory ToDoEntity({
+    required String id,
+    required String title,
+    String? des,
+    @JsonKey(name: "is_favorite") required bool isFavorite,
+    @JsonKey(name: "is_done") required bool isDone,
+  }) = _ToDoEntity;
+
+  factory ToDoEntity.fromJson(Map<String, dynamic> json) =>
+      _$ToDoEntityFromJson(json);
+}
 ```
 
-### 기본 화면(Todo List가 없는 화면) 만들기
-- "name"을 입력 받아 AppBar에 적용
-- Container를 통해 Todo가 없음을 표시
-- FAB를 통해 Todo 추가 기능 구현
-
-### Todo를 추가하는 화면 만들기
-- FAB를 누르면 Modal BottomSheet를 띄움
-- BottomSheet에는 사용자에게 할 일을 입력 받아 저장
-- 저장 버튼은 사용자의 입력값 유무에 따라 색상 변경 기능
-- 저장 버튼 클릭 시, Todo 저장하며 TaskPage로 전환
-
-### Todo가 추가된 화면 만들기
-- 각 Todo마다 Container로 구현
-- Container는 isDone, title, isFavorite가 표시되어있음
-- isDone, isFavorite 버튼은 터치 시, Toggle 적용
-- title은 클릭 시, TodoDetailPage로 이동
-
-### Todo 상세보기 화면 만들기
-- AppBar의 actions에 즐겨찾기 선택 기능 구현
-- TodoEntity의 des 필드를 body 부분에 띄워줌
-
-## 구현
-<img width="300" height="600" alt="Screenshot_1766463347" src="https://github.com/user-attachments/assets/f9173dd9-1134-42e2-a583-48fc7613ea7f" />
-<img width="300" height="600" alt="Screenshot_1766463457" src="https://github.com/user-attachments/assets/da959f5d-174f-4328-be6d-ea17525cf0f5" />
+### Firebase 연동
+<img width="768" height="304" alt="image" src="https://github.com/user-attachments/assets/4a1610a9-f1b3-4575-be1e-482af998dad8" />
 
 
-<img width="300" height="600" alt="Screenshot_1766463528" src="https://github.com/user-attachments/assets/e69f390b-1093-4968-a996-9113ba943112" />
-<img width="300" height="600" alt="Screenshot_1766464363" src="https://github.com/user-attachments/assets/08b2bdef-ca80-46d0-9b9c-5a5bcdff1935" />
+### MVVM 모델을 적용하여 패키지를 다시 구성
+<img width="307" height="439" alt="image" src="https://github.com/user-attachments/assets/638a8e42-ea26-41ca-8de5-16e110ed405b" />
 
 
-## 도전 기능
-### 다크테마 구현
-<img width="300" height="600" alt="Screenshot_1766464453" src="https://github.com/user-attachments/assets/ce8e5d01-b215-4ce7-a146-c008dfbc103a" />
-<img width="300" height="600" alt="Screenshot_1766464449" src="https://github.com/user-attachments/assets/9c33265d-d209-4710-8ac5-6ecb71eef90e" />
+#### Repository interface
+```dart
+abstract class TodoRepository {
+  // Todo 추가
+  Future<void> addTodo(ToDoEntity todo);
 
-### 위젯 컴포넌트화
-- Details
-- TodoView
-- BottomSheet
+  // Todo 내용 업데이트
+  Future<void> updateTodo(ToDoEntity todo);
 
-### UX(사용자 경험)를 고려한 기능 추가하기
-- Swipe로 Todo 삭제 기능
-<img width="500" height="1000" alt="Screenshot_1766464496" src="https://github.com/user-attachments/assets/39a688ad-08fa-4eb2-b271-b2ece1c0d53a" />
+  // Todo 삭제
+  Future<void> deleteTodo(ToDoEntity todo);
+
+  // 전체 Todo 목록 불러오기
+  Future<List<ToDoEntity>> getTodos();
+}
+```
+#### ViewModel
+```dart
+
+part 'todo_view_model.g.dart';
+
+@riverpod
+class TodoListNotifier extends _$TodoListNotifier {
+  @override
+  Future<List<ToDoEntity>> build() async {
+    final todoList = ref.watch(todoRepositoryProvider);
+
+    return await todoList.getTodos();
+  }
+
+  void addTodo(ToDoEntity todo) async {
+    state = await AsyncValue.guard(() async {
+      await ref.read(todoRepositoryProvider).addTodo(todo);
+      return await ref.read(todoRepositoryProvider).getTodos();
+    });
+  }
+
+  void deleteTodo(ToDoEntity todo) async {
+    state = await AsyncValue.guard(() async {
+      if (state.hasValue) {
+        await ref.read(todoRepositoryProvider).deleteTodo(todo);
+      }
+      return await ref.read(todoRepositoryProvider).getTodos();
+    });
+  }
+
+  void updateTodo(ToDoEntity todo) async {
+    state = await AsyncValue.guard(() async {
+      await ref.read(todoRepositoryProvider).updateTodo(todo);
+      return await ref.read(todoRepositoryProvider).getTodos();
+    });
+  }
+}
+
+```
+
+## ⭐ 구현
+
+#### UI
+<img width="300" height="600" alt="Screenshot_1768390269" src="https://github.com/user-attachments/assets/1a4580b6-d2b3-46b3-b60d-a70a55225ea9" />
+<img width="300" height="600" alt="Screenshot_1768390290" src="https://github.com/user-attachments/assets/ff809e12-77a8-4d9e-a3a7-c2d95e96d42a" />
+<img width="300" height="600" alt="Screenshot_1768390613" src="https://github.com/user-attachments/assets/61379d81-7293-4fd3-ab1f-159b9c648857" />
+<img width="300" height="600" alt="Screenshot_1768390732" src="https://github.com/user-attachments/assets/113baeaa-a82c-424f-b470-f456e0425e34" />
+
+#### Firebase
+<img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/97a12308-7a4e-4dc9-ad41-270557672db8" />
+
+
+## ⭐ 수정 및 추가된 기능
+- ModalBottomSheet Dismissible 기능 추가
+- TextField 데이터 리셋 기능 추가
+- 즐겨찾기 색상 변경
+- DetailPage title 표시
+- 즐겨찾기 순서대로 내림차순 정렬
