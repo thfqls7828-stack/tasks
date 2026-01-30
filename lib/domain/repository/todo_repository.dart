@@ -1,4 +1,4 @@
-import 'package:flutter_basic_assignment/entity/todo/to_do_entity.dart';
+import 'package:flutter_basic_assignment/domain/entity/todo/todo_entity.dart';
 
 // part 'todo_repository.g.dart';
 

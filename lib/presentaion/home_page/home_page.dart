@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_assignment/ui/error/error_page.dart';
-import 'package:flutter_basic_assignment/ui/home_page/initail_page.dart';
-import 'package:flutter_basic_assignment/ui/home_page/task_page.dart';
-import 'package:flutter_basic_assignment/ui/home_page/widgets/bottom_sheet_add_to_do.dart';
-import 'package:flutter_basic_assignment/viewmodel/todo/todo_view_model.dart';
+import 'package:flutter_basic_assignment/presentaion/error/error_page.dart';
+import 'package:flutter_basic_assignment/presentaion/home_page/initail_page.dart';
+import 'package:flutter_basic_assignment/presentaion/home_page/task_page.dart';
+import 'package:flutter_basic_assignment/presentaion/home_page/widgets/bottom_sheet_add_to_do.dart';
+import 'package:flutter_basic_assignment/presentaion/viewmodel/todo/todo_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // first Page - HomePage

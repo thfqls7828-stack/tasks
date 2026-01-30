@@ -1,5 +1,5 @@
-import 'package:flutter_basic_assignment/entity/todo/to_do_entity.dart';
-import 'package:flutter_basic_assignment/repoistory/todo/todo_repository_impl.dart';
+import 'package:flutter_basic_assignment/domain/entity/todo/todo_entity.dart';
+import 'package:flutter_basic_assignment/data/repository_impl/todo_repository_impl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'todo_view_model.g.dart';

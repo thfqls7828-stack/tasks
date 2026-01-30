@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_assignment/entity/todo/to_do_entity.dart';
-import 'package:flutter_basic_assignment/viewmodel/todo/todo_view_model.dart';
+import 'package:flutter_basic_assignment/domain/entity/todo/todo_entity.dart';
+import 'package:flutter_basic_assignment/presentaion/viewmodel/todo/todo_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Modal BottomSheet

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_assignment/viewmodel/todo/todo_view_model.dart';
+import 'package:flutter_basic_assignment/presentaion/viewmodel/todo/todo_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ToDoDetailPage extends ConsumerWidget {

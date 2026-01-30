@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'to_do_entity.dart';
+part of 'todo_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'to_do_entity.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$ToDoEntity {
+mixin _$TodoDto {
 
  String get id; String get title; String? get des;@JsonKey(name: "is_favorite") bool get isFavorite;@JsonKey(name: "is_done") bool get isDone;
-/// Create a copy of ToDoEntity
+/// Create a copy of TodoDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ToDoEntityCopyWith<ToDoEntity> get copyWith => _$ToDoEntityCopyWithImpl<ToDoEntity>(this as ToDoEntity, _$identity);
+$TodoDtoCopyWith<TodoDto> get copyWith => _$TodoDtoCopyWithImpl<TodoDto>(this as TodoDto, _$identity);
 
-  /// Serializes this ToDoEntity to a JSON map.
+  /// Serializes this TodoDto to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToDoEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.des, des) || other.des == des)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.isDone, isDone) || other.isDone == isDone));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodoDto&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.des, des) || other.des == des)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.isDone, isDone) || other.isDone == isDone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,id,title,des,isFavorite,isDone);
 
 @override
 String toString() {
-  return 'ToDoEntity(id: $id, title: $title, des: $des, isFavorite: $isFavorite, isDone: $isDone)';
+  return 'TodoDto(id: $id, title: $title, des: $des, isFavorite: $isFavorite, isDone: $isDone)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ToDoEntityCopyWith<$Res>  {
-  factory $ToDoEntityCopyWith(ToDoEntity value, $Res Function(ToDoEntity) _then) = _$ToDoEntityCopyWithImpl;
+abstract mixin class $TodoDtoCopyWith<$Res>  {
+  factory $TodoDtoCopyWith(TodoDto value, $Res Function(TodoDto) _then) = _$TodoDtoCopyWithImpl;
 @useResult
 $Res call({
  String id, String title, String? des,@JsonKey(name: "is_favorite") bool isFavorite,@JsonKey(name: "is_done") bool isDone
@@ -56,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$ToDoEntityCopyWithImpl<$Res>
-    implements $ToDoEntityCopyWith<$Res> {
-  _$ToDoEntityCopyWithImpl(this._self, this._then);
+class _$TodoDtoCopyWithImpl<$Res>
+    implements $TodoDtoCopyWith<$Res> {
+  _$TodoDtoCopyWithImpl(this._self, this._then);
 
-  final ToDoEntity _self;
-  final $Res Function(ToDoEntity) _then;
+  final TodoDto _self;
+  final $Res Function(TodoDto) _then;
 
-/// Create a copy of ToDoEntity
+/// Create a copy of TodoDto
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? des = freezed,Object? isFavorite = null,Object? isDone = null,}) {
   return _then(_self.copyWith(
@@ -79,8 +79,8 @@ as bool,
 }
 
 
-/// Adds pattern-matching-related methods to [ToDoEntity].
-extension ToDoEntityPatterns on ToDoEntity {
+/// Adds pattern-matching-related methods to [TodoDto].
+extension TodoDtoPatterns on TodoDto {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -93,10 +93,10 @@ extension ToDoEntityPatterns on ToDoEntity {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ToDoEntity value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TodoDto value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _ToDoEntity() when $default != null:
+case _TodoDto() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -115,10 +115,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ToDoEntity value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TodoDto value)  $default,){
 final _that = this;
 switch (_that) {
-case _ToDoEntity():
+case _TodoDto():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -136,10 +136,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ToDoEntity value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TodoDto value)?  $default,){
 final _that = this;
 switch (_that) {
-case _ToDoEntity() when $default != null:
+case _TodoDto() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -159,7 +159,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String? des, @JsonKey(name: "is_favorite")  bool isFavorite, @JsonKey(name: "is_done")  bool isDone)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _ToDoEntity() when $default != null:
+case _TodoDto() when $default != null:
 return $default(_that.id,_that.title,_that.des,_that.isFavorite,_that.isDone);case _:
   return orElse();
 
@@ -180,7 +180,7 @@ return $default(_that.id,_that.title,_that.des,_that.isFavorite,_that.isDone);ca
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String? des, @JsonKey(name: "is_favorite")  bool isFavorite, @JsonKey(name: "is_done")  bool isDone)  $default,) {final _that = this;
 switch (_that) {
-case _ToDoEntity():
+case _TodoDto():
 return $default(_that.id,_that.title,_that.des,_that.isFavorite,_that.isDone);case _:
   throw StateError('Unexpected subclass');
 
@@ -200,7 +200,7 @@ return $default(_that.id,_that.title,_that.des,_that.isFavorite,_that.isDone);ca
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String? des, @JsonKey(name: "is_favorite")  bool isFavorite, @JsonKey(name: "is_done")  bool isDone)?  $default,) {final _that = this;
 switch (_that) {
-case _ToDoEntity() when $default != null:
+case _TodoDto() when $default != null:
 return $default(_that.id,_that.title,_that.des,_that.isFavorite,_that.isDone);case _:
   return null;
 
@@ -212,9 +212,9 @@ return $default(_that.id,_that.title,_that.des,_that.isFavorite,_that.isDone);ca
 /// @nodoc
 @JsonSerializable()
 
-class _ToDoEntity implements ToDoEntity {
-  const _ToDoEntity({required this.id, required this.title, this.des, @JsonKey(name: "is_favorite") required this.isFavorite, @JsonKey(name: "is_done") required this.isDone});
-  factory _ToDoEntity.fromJson(Map<String, dynamic> json) => _$ToDoEntityFromJson(json);
+class _TodoDto implements TodoDto {
+  const _TodoDto({required this.id, required this.title, this.des, @JsonKey(name: "is_favorite") required this.isFavorite, @JsonKey(name: "is_done") required this.isDone});
+  factory _TodoDto.fromJson(Map<String, dynamic> json) => _$TodoDtoFromJson(json);
 
 @override final  String id;
 @override final  String title;
@@ -222,20 +222,20 @@ class _ToDoEntity implements ToDoEntity {
 @override@JsonKey(name: "is_favorite") final  bool isFavorite;
 @override@JsonKey(name: "is_done") final  bool isDone;
 
-/// Create a copy of ToDoEntity
+/// Create a copy of TodoDto
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ToDoEntityCopyWith<_ToDoEntity> get copyWith => __$ToDoEntityCopyWithImpl<_ToDoEntity>(this, _$identity);
+_$TodoDtoCopyWith<_TodoDto> get copyWith => __$TodoDtoCopyWithImpl<_TodoDto>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$ToDoEntityToJson(this, );
+  return _$TodoDtoToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToDoEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.des, des) || other.des == des)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.isDone, isDone) || other.isDone == isDone));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TodoDto&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.des, des) || other.des == des)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.isDone, isDone) || other.isDone == isDone));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -244,15 +244,15 @@ int get hashCode => Object.hash(runtimeType,id,title,des,isFavorite,isDone);
 
 @override
 String toString() {
-  return 'ToDoEntity(id: $id, title: $title, des: $des, isFavorite: $isFavorite, isDone: $isDone)';
+  return 'TodoDto(id: $id, title: $title, des: $des, isFavorite: $isFavorite, isDone: $isDone)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ToDoEntityCopyWith<$Res> implements $ToDoEntityCopyWith<$Res> {
-  factory _$ToDoEntityCopyWith(_ToDoEntity value, $Res Function(_ToDoEntity) _then) = __$ToDoEntityCopyWithImpl;
+abstract mixin class _$TodoDtoCopyWith<$Res> implements $TodoDtoCopyWith<$Res> {
+  factory _$TodoDtoCopyWith(_TodoDto value, $Res Function(_TodoDto) _then) = __$TodoDtoCopyWithImpl;
 @override @useResult
 $Res call({
  String id, String title, String? des,@JsonKey(name: "is_favorite") bool isFavorite,@JsonKey(name: "is_done") bool isDone
@@ -263,17 +263,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$ToDoEntityCopyWithImpl<$Res>
-    implements _$ToDoEntityCopyWith<$Res> {
-  __$ToDoEntityCopyWithImpl(this._self, this._then);
+class __$TodoDtoCopyWithImpl<$Res>
+    implements _$TodoDtoCopyWith<$Res> {
+  __$TodoDtoCopyWithImpl(this._self, this._then);
 
-  final _ToDoEntity _self;
-  final $Res Function(_ToDoEntity) _then;
+  final _TodoDto _self;
+  final $Res Function(_TodoDto) _then;
 
-/// Create a copy of ToDoEntity
+/// Create a copy of TodoDto
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? des = freezed,Object? isFavorite = null,Object? isDone = null,}) {
-  return _then(_ToDoEntity(
+  return _then(_TodoDto(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,des: freezed == des ? _self.des : des // ignore: cast_nullable_to_non_nullable

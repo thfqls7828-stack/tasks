@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'to_do_entity.dart';
+part of 'todo_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
