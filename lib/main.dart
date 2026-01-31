@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_assignment/core/theme/themes.dart';
 import 'package:flutter_basic_assignment/firebase_options.dart';
+import 'package:flutter_basic_assignment/core/router/router.dart';
 import 'package:flutter_basic_assignment/presentaion/home_page/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,11 +18,11 @@ class TasksApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       themeMode: ThemeMode.light,
       theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
-      home: HomePage(name: "영광"),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_basic_assignment/domain/entity/todo/todo_entity.dart';
 import 'package:flutter_basic_assignment/presentaion/to_do_detail_page/to_do_detail_page.dart';
 import 'package:flutter_basic_assignment/presentaion/viewmodel/todo/todo_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 // Provider has Data
 class TaskPage extends ConsumerWidget {
@@ -27,13 +28,7 @@ class TaskPage extends ConsumerWidget {
 
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ToDoDetailPage(id: todos[index].id),
-                      ),
-                    );
+                    context.push('/detail/${todo.id}');
                   },
                   child: TodoView(todo: todo),
                 );

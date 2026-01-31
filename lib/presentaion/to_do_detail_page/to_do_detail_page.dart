@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_assignment/presentaion/viewmodel/todo/todo_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class ToDoDetailPage extends ConsumerWidget {
   const ToDoDetailPage({super.key, required this.id});
@@ -22,7 +23,7 @@ class ToDoDetailPage extends ConsumerWidget {
             actionsPadding: EdgeInsets.symmetric(horizontal: 20),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => context.pop(),
             ),
             actions: [
               IconButton(
