@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'todo_repository_impl.dart';
+part of 'todo_repository_di.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -48,4 +48,4 @@ final class TodoRepositoryProvider
   }
 }
 
-String _$todoRepositoryHash() => r'7779394dd19feaaa0301c0b0674c52f196dc9a06';
+String _$todoRepositoryHash() => r'5124a11da6ff6ed4aba9c5b8a7d953755b6375f8';

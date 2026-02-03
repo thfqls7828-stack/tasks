@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_basic_assignment/core/di/repository/todo_repository_di.dart';
-import 'package:flutter_basic_assignment/data/DTO/todo_dto.dart';
 import 'package:flutter_basic_assignment/data/data_source/todo_data_source.dart';
+import 'package:flutter_basic_assignment/data/dto/todo/todo_dto.dart';
+import 'package:flutter_basic_assignment/data/dto/todo_last_doc/todo_last_doc.dart';
 import 'package:flutter_basic_assignment/domain/entity/todo/todo_entity.dart';
+import 'package:flutter_basic_assignment/domain/entity/todo_last_doc/todo_last_doc.dart';
 import 'package:flutter_basic_assignment/domain/repository/todo_repository.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'todo_repository_impl.g.dart';
 
 class TodoRepositoryImpl implements TodoRepository {
   TodoDataSource todoDataSource;
@@ -18,6 +16,7 @@ class TodoRepositoryImpl implements TodoRepository {
     final todoDto = TodoDto(
       id: todo.id,
       title: todo.title,
+      des: todo.des,
       isFavorite: todo.isFavorite,
       isDone: todo.isDone,
     );
@@ -30,6 +29,7 @@ class TodoRepositoryImpl implements TodoRepository {
     final todoDto = TodoDto(
       id: todo.id,
       title: todo.title,
+      des: todo.des,
       isFavorite: todo.isFavorite,
       isDone: todo.isDone,
     );
@@ -38,19 +38,20 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
-  Future<List<ToDoEntity>> getTodos() async {
-    final todoDtoList = await todoDataSource.getTodos();
-    return todoDtoList
+  Future<TodoLastDoc> getTodos(DocumentSnapshot? lastDoc) async {
+    final todoDtoList = await todoDataSource.getTodos(lastDoc);
+    final todos = todoDtoList.todos
         .map(
-          (todoDto) => ToDoEntity(
-            id: todoDto.id,
-            title: todoDto.title,
-            des: todoDto.des,
-            isFavorite: todoDto.isFavorite,
-            isDone: todoDto.isDone,
+          (todo) => ToDoEntity(
+            id: todo.id,
+            title: todo.title,
+            des: todo.des,
+            isFavorite: todo.isFavorite,
+            isDone: todo.isDone,
           ),
         )
         .toList();
+    return TodoLastDoc(todos: todos, lastDoc: todoDtoList.lastDoc);
   }
 
   @override

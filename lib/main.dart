@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic_assignment/core/theme/themes.dart';
 import 'package:flutter_basic_assignment/firebase_options.dart';
 import 'package:flutter_basic_assignment/core/router/router.dart';
-import 'package:flutter_basic_assignment/presentaion/home_page/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {

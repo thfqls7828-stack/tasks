@@ -8,13 +8,15 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 10,
-        children: [
-          Icon(CupertinoIcons.clear_circled_solid, size: 100),
-          Text(error.toString(), style: TextStyle(fontSize: 20)),
-        ],
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 10,
+          children: [
+            Icon(CupertinoIcons.clear_circled_solid, size: 100),
+            Text(error.toString(), style: TextStyle(fontSize: 20)),
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_basic_assignment/domain/entity/todo/todo_entity.dart';
-
-// part 'todo_repository.g.dart';
+import 'package:flutter_basic_assignment/domain/entity/todo_last_doc/todo_last_doc.dart';
 
 abstract class TodoRepository {
   // Todo 추가
@@ -13,5 +13,5 @@ abstract class TodoRepository {
   Future<void> deleteTodo(ToDoEntity todo);
 
   // 전체 Todo 목록 불러오기
-  Future<List<ToDoEntity>> getTodos();
+  Future<TodoLastDoc> getTodos(DocumentSnapshot? lastDoc);
 }

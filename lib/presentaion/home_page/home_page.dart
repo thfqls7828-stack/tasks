@@ -46,8 +46,8 @@ class HomePage extends ConsumerWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: todoAsyncValue.when(
-          data: (todos) {
-            return todos.isEmpty ? InitailPage(name: name) : TaskPage();
+          data: (state) {
+            return state.todos.isEmpty ? InitailPage(name: name) : TaskPage();
           },
           error: (error, stackTrace) {
             return ErrorPage(error: error);

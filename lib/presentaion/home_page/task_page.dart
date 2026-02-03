@@ -1,6 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_basic_assignment/domain/entity/todo/todo_entity.dart';
-import 'package:flutter_basic_assignment/presentaion/to_do_detail_page/to_do_detail_page.dart';
 import 'package:flutter_basic_assignment/presentaion/viewmodel/todo/todo_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,28 +11,48 @@ class TaskPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todos = ref.watch(todoListProvider);
+    final state = ref.watch(todoListProvider);
 
-    return todos.when(
-      data: (todos) {
+    return state.when(
+      data: (state) {
         return GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: Padding(
             padding: const EdgeInsets.only(bottom: 50),
-            child: ListView.builder(
-              itemCount: todos.length,
-              itemBuilder: (context, index) {
-                final todo = todos[index];
-
-                return GestureDetector(
-                  onTap: () {
-                    context.push('/detail/${todo.id}');
-                  },
-                  child: TodoView(todo: todo),
-                );
+            child: NotificationListener(
+              onNotification: (notification) {
+                if (notification is ScrollUpdateNotification) {
+                  if (notification.metrics.pixels >=
+                      notification.metrics.maxScrollExtent) {
+                    ref.read(todoListProvider.notifier).fetchTodos();
+                    return false;
+                  }
+                }
+                return false;
               },
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  await ref.read(todoListProvider.notifier).refresh();
+                },
+                child: ListView.builder(
+                  itemCount: state.todos.length,
+                  itemBuilder: (context, index) {
+                    final todo = state.todos[index];
+
+                    return GestureDetector(
+                      onTap: () {
+                        context.goNamed(
+                          'detail',
+                          pathParameters: {'id': todo.id, 'name': '영광'},
+                        );
+                      },
+                      child: TodoView(todo: todo),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         );
@@ -82,16 +102,41 @@ class TodoView extends ConsumerWidget {
                 color: Colors.black,
               ),
             ),
-            Text(
-              todo.title,
-              style: TextStyle(
-                decorationThickness: 3,
-                decorationColor: Colors.black54,
-                decoration: todo.isDone ? TextDecoration.lineThrough : null,
-                color: Colors.black,
+            Expanded(
+              child: Hero(
+                tag: todo.id,
+                flightShuttleBuilder:
+                    (
+                      flightContext,
+                      animation,
+                      flightDirection,
+                      fromHeroContext,
+                      toHeroContext,
+                    ) {
+                      final textStyle = DefaultTextStyle.of(
+                        toHeroContext,
+                      ).style;
+
+                      return FittedBox(
+                        child: DefaultTextStyle(
+                          style: textStyle,
+                          child: toHeroContext.widget,
+                        ),
+                      );
+                    },
+                child: AutoSizeText(
+                  todo.title,
+                  maxLines: 1,
+                  minFontSize: 12,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    decorationThickness: 3,
+                    decoration: todo.isDone ? TextDecoration.lineThrough : null,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ),
-            Spacer(),
             IconButton(
               onPressed: () {
                 ref

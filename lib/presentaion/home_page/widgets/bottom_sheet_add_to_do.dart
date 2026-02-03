@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_assignment/core/debouncing/debouncer.dart';
 import 'package:flutter_basic_assignment/domain/entity/todo/todo_entity.dart';
 import 'package:flutter_basic_assignment/presentaion/viewmodel/todo/todo_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +17,7 @@ class BottomSheetAddToDoState extends ConsumerState<BottomSheetAddToDo> {
   final desController = TextEditingController();
   bool isDetail = false;
   bool isFavorite = false;
+  final debouncer = Debouncer();
 
   @override
   void initState() {
@@ -98,9 +100,12 @@ class BottomSheetAddToDoState extends ConsumerState<BottomSheetAddToDo> {
                 GestureDetector(
                   onTap: () {
                     if (titleController.text.trim().isNotEmpty) {
-                      saveTodo();
-                      Navigator.pop(context);
-                      setState(() {});
+                      debouncer.run(() {
+                        saveTodo();
+                        Navigator.pop(context);
+                        debouncer.dispose();
+                        setState(() {});
+                      });
                     }
                   },
                   child: Text(

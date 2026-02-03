@@ -13,13 +13,15 @@ class ToDoDetailPage extends ConsumerWidget {
     final todoAsyncValue = ref.watch(todoListProvider);
 
     return todoAsyncValue.when(
-      data: (todos) {
-        final todo = todos.firstWhere((e) {
+      data: (state) {
+        final todo = state.todos.firstWhere((e) {
           return e.id == id;
         });
 
         return Scaffold(
           appBar: AppBar(
+            centerTitle: true,
+            title: Hero(tag: todo.id, child: Text(todo.title)),
             actionsPadding: EdgeInsets.symmetric(horizontal: 20),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),

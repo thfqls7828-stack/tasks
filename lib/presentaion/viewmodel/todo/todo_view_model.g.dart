@@ -13,7 +13,7 @@ part of 'todo_view_model.dart';
 final todoListProvider = TodoListNotifierProvider._();
 
 final class TodoListNotifierProvider
-    extends $AsyncNotifierProvider<TodoListNotifier, List<ToDoEntity>> {
+    extends $AsyncNotifierProvider<TodoListNotifier, TodoListState> {
   TodoListNotifierProvider._()
     : super(
         from: null,
@@ -33,20 +33,19 @@ final class TodoListNotifierProvider
   TodoListNotifier create() => TodoListNotifier();
 }
 
-String _$todoListNotifierHash() => r'672673f3afe5dbb7d338af20182937385769ff21';
+String _$todoListNotifierHash() => r'6f246a4de48ffe09740cc79d913e5fab554d8850';
 
-abstract class _$TodoListNotifier extends $AsyncNotifier<List<ToDoEntity>> {
-  FutureOr<List<ToDoEntity>> build();
+abstract class _$TodoListNotifier extends $AsyncNotifier<TodoListState> {
+  FutureOr<TodoListState> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref =
-        this.ref as $Ref<AsyncValue<List<ToDoEntity>>, List<ToDoEntity>>;
+    final ref = this.ref as $Ref<AsyncValue<TodoListState>, TodoListState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<List<ToDoEntity>>, List<ToDoEntity>>,
-              AsyncValue<List<ToDoEntity>>,
+              AnyNotifier<AsyncValue<TodoListState>, TodoListState>,
+              AsyncValue<TodoListState>,
               Object?,
               Object?
             >;
